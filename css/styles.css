@@ -1,0 +1,69 @@
+header {
+  background-color: #6d9886;
+  color: white;
+  font-family: Poppins, sans-serif;
+}
+
+main {
+  font-family: Raleway, sans-serif;
+  color: #393e46;
+}
+
+.tag {
+  font-family: Raleway, sans-serif;
+  padding-top: 25pt;
+  padding-left: 15px;
+  font-size: 10pt;
+}
+
+.subtitle {
+  display: flex;
+  text-align: center;
+  background-color: #393e46;
+  color: white;
+  font-size: 11pt;
+}
+
+.gen-con {
+  height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.gen-row {
+  height: 200px;
+  width: 450px;
+  margin: 0 auto;
+}
+
+li {
+  line-height: 60px;
+  list-style-type: none;
+  font-size: 15pt;
+}
+
+.gen-col {
+  display: flex;
+  justify-content: center;
+}
+
+.gen-but {
+  margin-top: 50px;
+  background-color: #f2e7d5;
+  font-family: Raleway, sans-serif;
+  color: #393e46;
+  border: none;
+  height: 45px;
+  width: 120px;
+  box-shadow: 0 4px 7px -6px #393e46;
+  border-radius: 3px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.rando-list {
+  border-top: 1px solid #f2e7d5;
+  border-bottom: 1px solid #f2e7d5;
+}
