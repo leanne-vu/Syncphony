@@ -2,6 +2,8 @@
 var $musicList = document.querySelector('#music-list');
 var $exploreButton = document.querySelector('.gen-but');
 function getUserData() {
+  var $noGenre = document.querySelector('.no-genres');
+  $noGenre.className = 'hidden no-genres';
   var $list = document.querySelectorAll('li');
   for (var z = 0; z < $list.length; z++) {
     $list[z].remove();
@@ -29,13 +31,9 @@ function addClicked() {
     var genreName = event.target.closest('li');
     data.genre.push(genreName.textContent);
     genreName.remove();
+    renderSelections(data.genre);
   }
-  var $selectionList = document.querySelector('#sel-list');
-  for (var i = 0; i < data.genre.length; i++) {
-    var $li = document.createElement('li');
-    $li.textContent = data.genre[i];
-    $selectionList.appendChild($li);
-  }
+
 }
 
 document.addEventListener('DOMContentLoaded', renderSelections);
@@ -87,8 +85,11 @@ function swapViews(dataview) {
 var $listClicked = document.querySelector('.fa-list');
 $listClicked.addEventListener('click', function () {
   swapViews('selections');
+
 });
 var $homeClicked = document.querySelector('.fa-house');
 $homeClicked.addEventListener('click', function () {
   swapViews('generator');
+  var $noGenre = document.querySelector('.no-genres');
+  $noGenre.className = 'no-genres';
 });
