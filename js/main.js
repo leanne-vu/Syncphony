@@ -13,6 +13,9 @@ function getUserData() {
       var $li = document.createElement('li');
       $li.textContent = xhr.response[i];
       $musicList.appendChild($li);
+      var $icon = document.createElement('i');
+      $icon.className = 'fa-regular fa-plus';
+      $li.appendChild($icon);
     }
 
   }); xhr.send();

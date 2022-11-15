@@ -67,3 +67,16 @@ button:hover {
   border-top: 1px solid #f2e7d5;
   border-bottom: 1px solid #f2e7d5;
 }
+
+.fa-plus {
+  float: right;
+  margin-top: 10px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #6d9886;
+  color: #f2e7d5;
+  width: 35px;
+  height: 35px;
+  font-size: 20pt;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+}
