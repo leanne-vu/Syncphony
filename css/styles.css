@@ -129,6 +129,7 @@ i:hover {
 .fa-list {
   float: right;
   font-size: 20pt;
+  padding-right: 5px;
 }
 
 .fa-house {
@@ -136,4 +137,11 @@ i:hover {
   padding-top: 35px;
   font-size: 20pt;
   color: #f2e7d5;
+}
+
+.press {
+  font-size: 15pt;
+  text-align: center;
+  margin-block-start: 50px;
+  margin-block-end: 50px;
 }
