@@ -4,7 +4,7 @@ var $exploreButton = document.querySelector('.gen-but');
 function getUserData() {
   var $noGenre = document.querySelector('.no-genres');
   $noGenre.className = 'hidden no-genres';
-  var $list = document.querySelectorAll('li');
+  var $list = document.querySelectorAll('.rando-li');
   for (var z = 0; z < $list.length; z++) {
     $list[z].remove();
   }
@@ -15,6 +15,7 @@ function getUserData() {
     for (var i = 0; i < xhr.response.length; i++) {
       var $li = document.createElement('li');
       $li.textContent = xhr.response[i];
+      $li.setAttribute('class', 'rando-li');
       $musicList.appendChild($li);
       var $icon = document.createElement('i');
       $icon.className = 'fa-regular fa-plus first';
@@ -30,44 +31,52 @@ function addClicked() {
   if (event.target.className === 'fa-regular fa-plus first') {
     var genreName = event.target.closest('li');
     data.genre.push(genreName.textContent);
+    var $selectionList = document.querySelector('#sel-list');
+    $selectionList.appendChild(renderSelections(genreName.textContent));
     genreName.remove();
   }
 }
-
-document.addEventListener('DOMContentLoaded', renderSelections);
-function renderSelections() {
-  var $selectionList = document.querySelector('#sel-list');
+document.addEventListener('DOMContentLoaded', function () {
   swapViews(data.view);
+  selectionLoop(data);
+}
+);
+
+function renderSelections(render) {
+  var $li = document.createElement('li');
+  $li.textContent = render;
+  var $deleteBut = document.createElement('i');
+  $deleteBut.className = 'fa-solid fa-trash-can second sel-trash';
+  $li.appendChild($deleteBut);
+  var $addBut = document.createElement('i');
+  $addBut.className = 'fa-regular fa-plus second';
+  $li.appendChild($addBut);
+
+  var $divRow = document.createElement('div');
+  $divRow.setAttribute('class', 'row');
+  $li.appendChild($divRow);
+  var $icon1 = document.createElement('i');
+  $icon1.className = 'fa-solid fa-star';
+  $divRow.appendChild($icon1);
+  var $icon2 = document.createElement('i');
+  $icon2.className = 'fa-solid fa-star';
+  $divRow.appendChild($icon2);
+  var $icon3 = document.createElement('i');
+  $icon3.className = 'fa-solid fa-star';
+  $divRow.appendChild($icon3);
+  var $icon4 = document.createElement('i');
+  $icon4.className = 'fa-solid fa-star';
+  $divRow.appendChild($icon4);
+  var $icon5 = document.createElement('i');
+  $icon5.className = 'fa-solid fa-star';
+  $divRow.appendChild($icon5);
+  return $li;
+}
+var $selectionList = document.querySelector('#sel-list');
+function selectionLoop(data) {
   for (var i = 0; i < data.genre.length; i++) {
-    var $li = document.createElement('li');
-    $li.textContent = data.genre[i];
-    $selectionList.appendChild($li);
-    var $deleteBut = document.createElement('i');
-    $deleteBut.className = 'fa-solid fa-trash-can second sel-trash';
-    $li.appendChild($deleteBut);
-    var $addBut = document.createElement('i');
-    $addBut.className = 'fa-regular fa-plus second';
-    $li.appendChild($addBut);
-
-    var $divRow = document.createElement('div');
-    $divRow.setAttribute('class', 'row');
-    $li.appendChild($divRow);
-    var $icon1 = document.createElement('i');
-    $icon1.className = 'fa-solid fa-star';
-    $divRow.appendChild($icon1);
-    var $icon2 = document.createElement('i');
-    $icon2.className = 'fa-solid fa-star';
-    $divRow.appendChild($icon2);
-    var $icon3 = document.createElement('i');
-    $icon3.className = 'fa-solid fa-star';
-    $divRow.appendChild($icon3);
-    var $icon4 = document.createElement('i');
-    $icon4.className = 'fa-solid fa-star';
-    $divRow.appendChild($icon4);
-    var $icon5 = document.createElement('i');
-    $icon5.className = 'fa-solid fa-star';
-    $divRow.appendChild($icon5);
-
+    var all = renderSelections(data.genre[i]);
+    $selectionList.appendChild(all);
   }
 }
 var $dataviews = document.querySelectorAll('.view');
@@ -83,11 +92,14 @@ function swapViews(dataview) {
 var $listClicked = document.querySelector('.fa-list');
 $listClicked.addEventListener('click', function () {
   swapViews('selections');
-  renderSelections(data.genre);
 });
 var $homeClicked = document.querySelector('.fa-house');
 $homeClicked.addEventListener('click', function () {
   swapViews('generator');
+  var $list = document.querySelectorAll('.rando-li');
+  for (var z = 0; z < $list.length; z++) {
+    $list[z].remove();
+  }
   var $noGenre = document.querySelector('.no-genres');
   $noGenre.className = 'no-genres';
 });
