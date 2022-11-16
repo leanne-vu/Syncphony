@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Raleway&display=swap" rel="stylesheet">
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -11,8 +17,65 @@
 </head>
 <body>
   <header>
+    <div class="container">
+      <div class="column-full">
+        <i class="fa-solid fa-house"></i>
+        <div class="row">
+          <h1 class="header">Syncphony</h1>
+          <p class="tag">explore music to find your favorite</p>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="view" data-view="generator">
+      <div class="container">
+        <div class="subtitle row">
+          <div class="column-full">
+            <h2>Your new landscapes
+              <i class="fa-solid fa-list"></i>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="container gen-con">
+        <div class="gen-row row">
+          <div class="rando-list column-full">
+            <ul id="music-list">
+            </ul>
+            <div class="no-genres">
+              <h2 class="press">Press explore for more genres!</h2>
+            </div>
+          </div>
+          <div class="gen-col column-full">
+            <button class="gen-but">EXPLORE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view hidden" data-view="selections">
+      <div class="container">
+        <div class="subtitle row">
+          <div class="column-full">
+            <h2>Your musical selections</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container sel-con">
+        <div class="sel-con row">
+          <div class="column-full">
+            <ul id="sel-list">
+            </ul>
+          </div>
+          <div class="column-full wants needs">
+            <h2 >Want to discover more options?</h2>
+          </div>
+          <div class="column-full wants">
+            <button class="return-but">RETURN</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
