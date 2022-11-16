@@ -68,6 +68,7 @@ button:hover {
   border-bottom: 1px solid #f2e7d5;
 }
 
+/* add buttons on generator page */
 .first {
   float: right;
   margin-top: 10px;
@@ -98,6 +99,11 @@ button:hover {
 .fa-star {
   color: #d9d9d9;
   letter-spacing: 5px;
+}
+
+/* star ratings */
+.rated {
+  color: #f2e7d5;
 }
 
 i:hover {
@@ -142,12 +148,12 @@ i:hover {
 .press {
   font-size: 15pt;
   text-align: center;
-  margin-block-start: 70px;
-  margin-block-end: 70px;
+  margin-block-start: 80px;
+  margin-block-end: 80px;
 }
 
 .needs {
-  margin-block-start: 50px;
+  margin-block-start: 30px;
 }
 
 .wants {
@@ -156,7 +162,8 @@ i:hover {
 }
 
 .return-but {
-  margin-top: 50px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   background-color: #f2e7d5;
   font-family: Raleway, sans-serif;
   color: #393e46;

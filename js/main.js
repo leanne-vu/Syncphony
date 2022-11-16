@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function renderSelections(render) {
   var $li = document.createElement('li');
   $li.textContent = render;
+  $li.setAttribute('class', 'genreList');
   var $deleteBut = document.createElement('i');
   $deleteBut.className = 'fa-solid fa-trash-can second sel-trash';
   $li.appendChild($deleteBut);
@@ -56,19 +57,19 @@ function renderSelections(render) {
   $divRow.setAttribute('class', 'row');
   $li.appendChild($divRow);
   var $icon1 = document.createElement('i');
-  $icon1.className = 'fa-solid fa-star';
+  $icon1.className = 'fa-solid fa-star gen-rate';
   $divRow.appendChild($icon1);
   var $icon2 = document.createElement('i');
-  $icon2.className = 'fa-solid fa-star';
+  $icon2.className = 'fa-solid fa-star gen-rate';
   $divRow.appendChild($icon2);
   var $icon3 = document.createElement('i');
-  $icon3.className = 'fa-solid fa-star';
+  $icon3.className = 'fa-solid fa-star gen-rate';
   $divRow.appendChild($icon3);
   var $icon4 = document.createElement('i');
-  $icon4.className = 'fa-solid fa-star';
+  $icon4.className = 'fa-solid fa-star gen-rate';
   $divRow.appendChild($icon4);
   var $icon5 = document.createElement('i');
-  $icon5.className = 'fa-solid fa-star';
+  $icon5.className = 'fa-solid fa-star gen-rate';
   $divRow.appendChild($icon5);
   return $li;
 }
