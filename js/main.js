@@ -31,9 +31,7 @@ function addClicked() {
     var genreName = event.target.closest('li');
     data.genre.push(genreName.textContent);
     genreName.remove();
-    renderSelections(data.genre);
   }
-
 }
 
 document.addEventListener('DOMContentLoaded', renderSelections);
@@ -85,11 +83,16 @@ function swapViews(dataview) {
 var $listClicked = document.querySelector('.fa-list');
 $listClicked.addEventListener('click', function () {
   swapViews('selections');
-
+  renderSelections(data.genre);
 });
 var $homeClicked = document.querySelector('.fa-house');
 $homeClicked.addEventListener('click', function () {
   swapViews('generator');
   var $noGenre = document.querySelector('.no-genres');
   $noGenre.className = 'no-genres';
+});
+
+var $returnButton = document.querySelector('.return-but');
+$returnButton.addEventListener('click', function () {
+  swapViews('generator');
 });
