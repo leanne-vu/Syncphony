@@ -88,13 +88,42 @@
           </div>
         </div>
       </div>
-      <div class="container sel-con">
-        <div class="sel-con row">
+      <div class="container">
+        <div class="row">
           <div class="column-full">
             <ul id="genre-adds">
             </ul>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="view" data-view="entry-form">
+        <form>
+          <div class="row">
+            <div class="column-full">
+              <h1 class="h1">New Entry</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" onerror="this.src='images/placeholder-image-square.jpg'"
+            alt="placeholder image">
+            </div>
+            <div class="column-half">
+              <label for="title">Title</label>
+              <input required type="text" id="title" name="title">
+              <label for="photo-url">Photo URL</label>
+              <input required type="url" id="photo-url" name="url">
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <label for="notes">Notes</label>
+              <textarea name="notes" required rows="8" id="notes"></textarea>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </main>
