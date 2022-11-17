@@ -30,7 +30,7 @@ $musicList.addEventListener('click', addClicked);
 function addClicked() {
   if (event.target.className === 'fa-regular fa-plus first') {
     var genreName = event.target.closest('li');
-    data.genre.push(genreName.textContent);
+    data.genre[genreName.textContent] = [];
     var $selectionList = document.querySelector('#sel-list');
     $selectionList.appendChild(renderSelections(genreName.textContent));
     genreName.remove();
@@ -46,6 +46,7 @@ function renderSelections(render) {
   var $li = document.createElement('li');
   $li.textContent = render;
   $li.setAttribute('class', 'genreList');
+  $li.setAttribute('data-genre', render);
   var $deleteBut = document.createElement('i');
   $deleteBut.className = 'fa-solid fa-trash-can second sel-trash';
   $li.appendChild($deleteBut);
@@ -75,9 +76,11 @@ function renderSelections(render) {
 }
 var $selectionList = document.querySelector('#sel-list');
 function selectionLoop(data) {
-  for (var i = 0; i < data.genre.length; i++) {
-    var all = renderSelections(data.genre[i]);
+  var genreArray = Object.keys(data.genre);
+  for (var i = 0; i < genreArray.length; i++) {
+    var all = renderSelections(genreArray[i]);
     $selectionList.appendChild(all);
+
   }
 }
 var $dataviews = document.querySelectorAll('.view');
