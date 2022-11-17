@@ -18,17 +18,31 @@
   width: 100%;
 }
 
+.column-qtr {
+  width: 50%;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
   }
 
+  #artist {
+    width: 75%;
+  }
+  .select { margin-left: 20px; }
+
   .column-full,
-  .column-half {
+  .column-half,
+  .column-qtr {
     padding: 0 0.75rem;
   }
 
   .column-half {
+    width: 50%;
+  }
+
+  .column-qtr {
     width: 50%;
   }
 }

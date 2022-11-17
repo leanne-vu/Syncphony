@@ -83,7 +83,7 @@
             <h2 class="specific-genre">Hello</h2>
             <div class="genre-specific-buttons">
               <i class="fa-solid fa-list"></i>
-              <i class="fa-regular fa-plus third"></i>
+              <i class="fa-regular fa-pen-to-square"></i>
             </div>
           </div>
         </div>
@@ -99,28 +99,58 @@
     </div>
     <div class="container">
       <div class="view" data-view="entry-form">
-        <form>
-          <div class="row">
-            <div class="column-full">
-              <h1 class="h1">New Entry</h1>
+        <div class="subtitle row">
+          <div class="column-full">
+            <h2 class="specific-genre-entry"></h2>
+            <div class="submit-button-div">
+              <button data-view="genreView" class="save" type="submit">SAVE</button>
             </div>
           </div>
+        </div>
+        <form>
           <div class="row">
-            <div class="column-half">
+            <div class="column-half picture-column">
               <img src="images/placeholder-image-square.jpg" onerror="this.src='images/placeholder-image-square.jpg'"
             alt="placeholder image">
             </div>
-            <div class="column-half">
-              <label for="title">Title</label>
-              <input required type="text" id="title" name="title">
-              <label for="photo-url">Photo URL</label>
-              <input required type="url" id="photo-url" name="url">
+            <div class="image-url column-half">
+              <div class="image-url-together">
+                <label for="image-url">Image URL</label>
+                <input required type="url" id="image-url" name="url" placeholder="Image URL">
+              </div>
             </div>
           </div>
           <div class="row">
-            <div class="column-full">
+            <div class="column-half">
+              <label for="artist">Artist</label>
+              <input required type="text" id="artist" name="title" placeholder="Artist name">
+            </div>
+            <div class="column-half title-type">
+              <div class="column-qtr select">
+                <label for="select">Song or Album?</label>
+                <select required id="select" name="select">
+                  <option value="song">Song</option>
+                  <option value="album">Album</option>
+                </select>
+              </div>
+              <div class="column-qtr">
+                <label for="title">Title</label>
+                <input required type="text" id="title" name="title" placeholder="Song/Album title">
+              </div>
+            </div>
+            <div class="column-half">
               <label for="notes">Notes</label>
-              <textarea name="notes" required rows="8" id="notes"></textarea>
+              <textarea name="notes" rows="8" id="notes" placeholder="Reviews, thoughts, comments ... write them here"></textarea>
+            </div>
+            <div class="column-half">
+              <h2 class="rate-entry">What would you rate this entry?</h2>
+              <div class="stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
             </div>
           </div>
         </form>
