@@ -112,3 +112,11 @@ var $returnButton = document.querySelector('.return-but');
 $returnButton.addEventListener('click', function () {
   swapViews('generator');
 });
+
+$selectionList.addEventListener('click', function () {
+  if (event.target.className === 'fa-regular fa-plus second') { swapViews('genreView'); }
+  var $specificGenre = document.querySelector('.specificGenre');
+  var genreName = event.target.closest('li').textContent;
+  $specificGenre.textContent = genreName;
+
+});
