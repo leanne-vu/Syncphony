@@ -28,6 +28,7 @@ $exploreButton.addEventListener('click', getUserData);
 
 $musicList.addEventListener('click', addClicked);
 function addClicked() {
+  var genreID = 0;
   if (event.target.className === 'fa-regular fa-plus first') {
     var genreName = event.target.closest('li');
     data.genre[genreName.textContent] = [];
@@ -115,8 +116,25 @@ $returnButton.addEventListener('click', function () {
 
 $selectionList.addEventListener('click', function () {
   if (event.target.className === 'fa-regular fa-plus second') { swapViews('genreView'); }
-  var $specificGenre = document.querySelector('.specificGenre');
+  var $specificGenre = document.querySelector('.specific-genre');
   var genreName = event.target.closest('li').textContent;
   $specificGenre.textContent = genreName;
 
+// add DELETE here later //
+});
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   var $specificGenre = document.querySelector('.specific-genre');
+//   $specificGenre.textContent = '';
+
+// });
+
+var $genreSpecific = document.querySelector('.genre-specific');
+$genreSpecific.addEventListener('click', function () {
+  if (event.target.className === 'fa-solid fa-list') {
+    swapViews('selections');
+  }
+  if (event.target.className === 'fa-regular fa-plus third') {
+    swapViews('entry-form');
+  }
 });
