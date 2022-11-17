@@ -174,14 +174,16 @@ i:hover {
   border-radius: 3px;
 }
 
-.third {
+.fa-pen-to-square {
   border-radius: 50%;
-  text-align: center;
+  justify-content: center;
   background-color: white;
+  display: flex;
+  align-items: center;
   color: #6d9886;
   width: 35px;
   height: 35px;
-  font-size: 20pt;
+  font-size: 18pt;
   float: right;
   position: relative;
   right: 10px;
@@ -198,16 +200,10 @@ i:hover {
 }
 
 img {
-  margin-bottom: 20px;
-  width: 75%;
-  height: 75%;
-  object-fit: contain;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5em;
+  margin-block-start: 15px;
+  width: 100%;
+  height: 70%;
+  object-fit: fill;
 }
 
 textarea,
@@ -220,9 +216,69 @@ input {
 
 input {
   height: 40px;
-  font-family: "Open Sans", sans-serif;
 }
 
-textarea {
-  font-family: "Open Sans", sans-serif;
+textarea,
+input,
+select {
+  font-family:
+    Raleway,
+    sans-serif;
+}
+
+.title-type {
+  display: flex;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+select {
+  width: 70%;
+  height: 40px;
+  border: solid 1px #b6b6b6;
+  border-radius: 4px;
+  color: grey;
+}
+
+.rate-entry {
+  text-align: center;
+}
+
+.stars {
+  text-align: center;
+  font-size: 20pt;
+}
+
+.image-url {
+  display: flex;
+  align-items: center;
+}
+
+#image-url {
+  width: 450px;
+}
+
+.picture-column {
+  margin-bottom: -75px;
+}
+
+.submit-button-div {
+  float: right;
+  position: relative;
+  bottom: 40px;
+  margin-right: 5px;
+  margin-bottom: -35px;
+}
+
+.save {
+  color: white;
+  background-color: #6d9886;
+  width: 60px;
+  height: 27px;
+  border-radius: 4px;
+  border: none;
 }

@@ -126,6 +126,9 @@ $selectionList.addEventListener('click', function () {
 document.addEventListener('DOMContentLoaded', function () {
   var $specificGenre = document.querySelector('.specific-genre');
   $specificGenre.textContent = data.currentGenre;
+  var $specificGenreEntry = document.querySelector('.specific-genre-entry');
+  $specificGenreEntry.textContent = data.currentGenre + ' Entry';
+
 });
 
 var $genreSpecific = document.querySelector('.genre-specific');
@@ -133,9 +136,11 @@ $genreSpecific.addEventListener('click', function () {
   if (event.target.className === 'fa-solid fa-list') {
     swapViews('selections');
   }
-  if (event.target.className === 'fa-regular fa-plus third') {
+  if (event.target.className === 'fa-regular fa-pen-to-square') {
     swapViews('entry-form');
+    var $specificGenreEntry = document.querySelector('.specific-genre-entry');
+    $specificGenreEntry.textContent = data.currentGenre + ' Entry';
   }
 });
 
-if (data.view !== 'genreView') { data.currentGenre = null; }
+if (data.view !== 'genreView' && data.view !== 'entry-form') { data.currentGenre = null; }
