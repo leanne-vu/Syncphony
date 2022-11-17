@@ -1,6 +1,7 @@
 /* exported data */
 var data = {
   view: 'generator',
+  currentGenre: '',
   genre: {}
 };
 
