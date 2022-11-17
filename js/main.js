@@ -119,15 +119,14 @@ $selectionList.addEventListener('click', function () {
   var $specificGenre = document.querySelector('.specific-genre');
   var genreName = event.target.closest('li').textContent;
   $specificGenre.textContent = genreName;
-
+  data.currentGenre = genreName;
 // add DELETE here later //
 });
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   var $specificGenre = document.querySelector('.specific-genre');
-//   $specificGenre.textContent = '';
-
-// });
+document.addEventListener('DOMContentLoaded', function () {
+  var $specificGenre = document.querySelector('.specific-genre');
+  $specificGenre.textContent = data.currentGenre;
+});
 
 var $genreSpecific = document.querySelector('.genre-specific');
 $genreSpecific.addEventListener('click', function () {
@@ -138,3 +137,5 @@ $genreSpecific.addEventListener('click', function () {
     swapViews('entry-form');
   }
 });
+
+if (data.view !== 'genreView') { data.currentGenre = null; }
