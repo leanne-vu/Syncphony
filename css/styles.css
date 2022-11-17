@@ -196,3 +196,33 @@ i:hover {
 .genre-specific {
   margin-bottom: -35px;
 }
+
+img {
+  margin-bottom: 20px;
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+textarea,
+input {
+  width: 100%;
+  margin-bottom: 2em;
+  border: solid 1px #b6b6b6;
+  border-radius: 4px;
+}
+
+input {
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+}
+
+textarea {
+  font-family: "Open Sans", sans-serif;
+}
