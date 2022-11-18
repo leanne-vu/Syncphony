@@ -270,6 +270,16 @@ select {
   margin-bottom: -35px;
 }
 
+.fa-delete-div {
+  float: left;
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.fa-delete-left {
+  font-size: 25pt;
+}
+
 .save {
   color: white;
   background-color: #6d9886;
@@ -286,6 +296,7 @@ select {
 #genre-adds > li {
   list-style-type: none;
   padding-bottom: 20px;
+  padding-top: 20px;
   border-bottom: 1px solid #f2e7d5;
 }
 
