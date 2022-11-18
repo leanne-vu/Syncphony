@@ -278,3 +278,31 @@ select {
   border-radius: 4px;
   border: none;
 }
+
+.artist-title {
+  text-align: center;
+}
+
+#genre-adds > li {
+  list-style-type: none;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f2e7d5;
+}
+
+#genre-adds {
+  padding-left: 0;
+}
+
+.first-row-genre {
+  display: flex;
+  align-items: center;
+}
+
+.notes-stars {
+  text-align: center;
+}
+
+.star-column {
+  margin-top: 10px;
+  font-size: 20pt;
+}

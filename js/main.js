@@ -28,7 +28,6 @@ $exploreButton.addEventListener('click', getUserData);
 
 $musicList.addEventListener('click', addClicked);
 function addClicked() {
-  var genreID = 0;
   if (event.target.className === 'fa-regular fa-plus first') {
     var genreName = event.target.closest('li');
     data.genre[genreName.textContent] = [];
@@ -120,6 +119,11 @@ $selectionList.addEventListener('click', function () {
   var genreName = event.target.closest('li').textContent;
   $specificGenre.textContent = genreName;
   data.currentGenre = genreName;
+  var $li = document.querySelectorAll('.entry-list-spec');
+  for (var e = 0; e < $li.length; e++) {
+    $li[e].remove();
+  }
+  entryLoop();
 // add DELETE here later //
 });
 
@@ -143,7 +147,10 @@ $genreSpecific.addEventListener('click', function () {
   }
 });
 
-if (data.view !== 'genreView' && data.view !== 'entry-form') { data.currentGenre = null; }
+if (data.view !== 'genreView' && data.view !== 'entry-form') {
+  data.currentGenre = null;
+
+}
 
 var $form = document.querySelector('form');
 $form.addEventListener('submit', function () {
@@ -171,3 +178,68 @@ $imageUrl.addEventListener('input', function () {
   $image.setAttribute('src', event.target.value);
 }
 );
+
+function renderEntries(individualGenre) {
+  var $li = document.createElement('li');
+  $li.setAttribute('class', 'entry-list-spec');
+  // set attribute for li here //
+  var $firstRow = document.createElement('div');
+  $firstRow.setAttribute('class', 'first-row-genre row');
+  $li.appendChild($firstRow);
+  var $firstColumnHalf = document.createElement('div');
+  $firstColumnHalf.setAttribute('class', 'entry-adds column-half');
+  $firstRow.appendChild($firstColumnHalf);
+  var $image = document.createElement('img');
+  $image.setAttribute('src', individualGenre.url);
+  $firstColumnHalf.appendChild($image);
+  var $secondColumnHalf = document.createElement('div');
+  $secondColumnHalf.setAttribute('class', 'entry-adds artist-title column-half');
+  $firstRow.appendChild($secondColumnHalf);
+  var $h3 = document.createElement('h3');
+  $h3.textContent = individualGenre.artist;
+  $secondColumnHalf.appendChild($h3);
+  var $h4 = document.createElement('h4');
+  $h4.textContent = individualGenre.type + ': ' + individualGenre.title;
+  $secondColumnHalf.appendChild($h4);
+  var $secondRow = document.createElement('div');
+  $secondRow.setAttribute('class', 'notes-stars row');
+  $li.appendChild($secondRow);
+  var $firstColumnFull = document.createElement('div');
+  $firstColumnFull.setAttribute('class', 'column-full');
+  $secondRow.appendChild($firstColumnFull);
+  var $second2ndRow = document.createElement('div');
+  $second2ndRow.setAttribute('class', 'notes-stars row');
+  $li.appendChild($second2ndRow);
+  var $starColumn = document.createElement('div');
+  $starColumn.setAttribute('class', 'star-column column-full');
+  $second2ndRow.appendChild($starColumn);
+  var $star1 = document.createElement('i');
+  $star1.setAttribute('class', 'fa-solid fa-star ent-star');
+  $starColumn.appendChild($star1);
+  var $star2 = document.createElement('i');
+  $star2.setAttribute('class', 'fa-solid fa-star ent-star');
+  $starColumn.appendChild($star2);
+  var $star3 = document.createElement('i');
+  $star3.setAttribute('class', 'fa-solid fa-star ent-star');
+  $starColumn.appendChild($star3);
+  var $star4 = document.createElement('i');
+  $star4.setAttribute('class', 'fa-solid fa-star ent-star');
+  $starColumn.appendChild($star4);
+  var $star5 = document.createElement('i');
+  $star5.setAttribute('class', 'fa-solid fa-star ent-star');
+  $starColumn.appendChild($star5);
+  return $li;
+}
+
+function entryLoop() {
+  var $ul = document.querySelector('#genre-adds');
+  var genreArray = Object.keys(data.genre);
+  for (var i = 0; i < genreArray.length; i++) {
+    if (genreArray[i] === data.currentGenre) {
+      for (var z = 0; z < data.genre[genreArray[i]].length; z++) {
+        var all = renderEntries(data.genre[genreArray[i]][z]);
+        $ul.appendChild(all);
+      }
+    }
+  }
+}
