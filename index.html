@@ -92,6 +92,10 @@
         <div class="row">
           <div class="column-full">
             <ul id="genre-adds">
+              <!-- <li>
+                <img src="images/placeholder-image-square.jpg">
+
+              </li> -->
             </ul>
           </div>
         </div>
@@ -103,14 +107,14 @@
           <div class="column-full">
             <h2 class="specific-genre-entry"></h2>
             <div class="submit-button-div">
-              <button data-view="genreView" class="save" type="submit">SAVE</button>
+              <button form="form" data-view="genreView" class="save" type="submit">SAVE</button>
             </div>
           </div>
         </div>
-        <form>
+        <form id="form">
           <div class="row">
             <div class="column-half picture-column">
-              <img src="images/placeholder-image-square.jpg" onerror="this.src='images/placeholder-image-square.jpg'"
+              <img class="form-image" src="images/placeholder-image-square.jpg" onerror="this.src='images/placeholder-image-square.jpg'"
             alt="placeholder image">
             </div>
             <div class="image-url column-half">
@@ -123,7 +127,7 @@
           <div class="row">
             <div class="column-half">
               <label for="artist">Artist</label>
-              <input required type="text" id="artist" name="title" placeholder="Artist name">
+              <input required type="text" id="artist" name="artist" placeholder="Artist name">
             </div>
             <div class="column-half title-type">
               <div class="column-qtr select">
