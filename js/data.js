@@ -1,8 +1,11 @@
 /* exported data */
 var data = {
   view: 'generator',
-  genre: []
+  currentGenre: '',
+  entryID: 0,
+  genre: {}
 };
+
 var previousDataJSON = localStorage.getItem('genre-storage');
 if (previousDataJSON !== null) {
   data = JSON.parse(previousDataJSON);
