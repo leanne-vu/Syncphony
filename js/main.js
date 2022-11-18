@@ -174,6 +174,8 @@ $form.addEventListener('submit', function () {
   $form.reset();
   swapViews('genreView');
   data.entryID++;
+  var $image = document.querySelector('.form-image');
+  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
 });
 
 var $imageUrl = document.querySelector('#image-url');
