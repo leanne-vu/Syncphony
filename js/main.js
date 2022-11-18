@@ -144,3 +144,30 @@ $genreSpecific.addEventListener('click', function () {
 });
 
 if (data.view !== 'genreView' && data.view !== 'entry-form') { data.currentGenre = null; }
+
+var $form = document.querySelector('form');
+$form.addEventListener('submit', function () {
+  event.preventDefault();
+  var entry = {
+    url: $form.elements.url.value,
+    artist: $form.elements.artist.value,
+    type: $form.elements.select.value,
+    title: $form.elements.title.value,
+    notes: $form.elements.notes.value
+  };
+  var genreArray = Object.keys(data.genre);
+  for (var i = 0; i < genreArray.length; i++) {
+    if (genreArray[i] === data.currentGenre) {
+      data.genre[genreArray[i]].push(entry);
+    }
+  }
+  $form.reset();
+  swapViews('genreView');
+});
+
+var $imageUrl = document.querySelector('#image-url');
+$imageUrl.addEventListener('input', function () {
+  var $image = document.querySelector('.form-image');
+  $image.setAttribute('src', event.target.value);
+}
+);
