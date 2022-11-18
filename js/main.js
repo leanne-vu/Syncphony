@@ -39,6 +39,7 @@ function addClicked() {
 document.addEventListener('DOMContentLoaded', function () {
   swapViews(data.view);
   selectionLoop(data);
+  entryLoop();
 }
 );
 
@@ -149,7 +150,6 @@ $genreSpecific.addEventListener('click', function () {
 
 if (data.view !== 'genreView' && data.view !== 'entry-form') {
   data.currentGenre = null;
-
 }
 
 var $form = document.querySelector('form');
@@ -160,16 +160,20 @@ $form.addEventListener('submit', function () {
     artist: $form.elements.artist.value,
     type: $form.elements.select.value,
     title: $form.elements.title.value,
-    notes: $form.elements.notes.value
+    notes: $form.elements.notes.value,
+    entryID: data.entryID
   };
   var genreArray = Object.keys(data.genre);
   for (var i = 0; i < genreArray.length; i++) {
     if (genreArray[i] === data.currentGenre) {
-      data.genre[genreArray[i]].push(entry);
+      data.genre[genreArray[i]].unshift(entry);
+      var $ul = document.querySelector('#genre-adds');
+      $ul.prepend(renderEntries(entry));
     }
   }
   $form.reset();
   swapViews('genreView');
+  data.entryID++;
 });
 
 var $imageUrl = document.querySelector('#image-url');
@@ -182,7 +186,7 @@ $imageUrl.addEventListener('input', function () {
 function renderEntries(individualGenre) {
   var $li = document.createElement('li');
   $li.setAttribute('class', 'entry-list-spec');
-  // set attribute for li here //
+  $li.setAttribute('data-entry-id', individualGenre.entryID);
   var $firstRow = document.createElement('div');
   $firstRow.setAttribute('class', 'first-row-genre row');
   $li.appendChild($firstRow);
@@ -206,6 +210,7 @@ function renderEntries(individualGenre) {
   $li.appendChild($secondRow);
   var $firstColumnFull = document.createElement('div');
   $firstColumnFull.setAttribute('class', 'column-full');
+  $firstColumnFull.textContent = individualGenre.notes;
   $secondRow.appendChild($firstColumnFull);
   var $second2ndRow = document.createElement('div');
   $second2ndRow.setAttribute('class', 'notes-stars row');
@@ -243,3 +248,11 @@ function entryLoop() {
     }
   }
 }
+
+var $backButton = document.querySelector('.fa-delete-left');
+$backButton.addEventListener('click', function () {
+  $form.reset();
+  swapViews('genreView');
+  var $image = document.querySelector('.form-image');
+  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+});
