@@ -235,6 +235,9 @@ function renderEntries(individualGenre) {
   var $star5 = document.createElement('i');
   $star5.setAttribute('class', 'fa-solid fa-star ent-star');
   $starColumn.appendChild($star5);
+  var $edit = document.createElement('i');
+  $edit.setAttribute('class', 'fa-solid fa-pencil');
+  $starColumn.appendChild($edit);
   return $li;
 }
 
