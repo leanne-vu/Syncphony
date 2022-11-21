@@ -3,6 +3,7 @@ var data = {
   view: 'generator',
   currentGenre: '',
   entryID: 0,
+  editing: null,
   genre: {}
 };
 
