@@ -286,6 +286,7 @@ $backButton.addEventListener('click', function () {
   swapViews('genreView');
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+  data.editing = null;
 });
 
 var $genreAdds = document.querySelector('#genre-adds');
