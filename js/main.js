@@ -82,7 +82,6 @@ function selectionLoop(data) {
   for (var i = 0; i < genreArray.length; i++) {
     var all = renderSelections(genreArray[i]);
     $selectionList.appendChild(all);
-
   }
 }
 var $dataviews = document.querySelectorAll('.view');
@@ -176,7 +175,7 @@ $form.addEventListener('submit', function () {
           entryID: data.genre[data.currentGenre][z].entryID
         };
         data.genre[data.currentGenre][z] = data.editing;
-        var $list = document.querySelectorAll('li');
+        var $list = document.querySelectorAll('.entry-list-spec');
         for (var k = 0; k < $list.length; k++) {
           if (Math.floor($list[k].getAttribute('data-entry-id')) === data.genre[data.currentGenre][z].entryID) {
             $list[k].replaceWith(renderEntries(data.genre[data.currentGenre][z]));
