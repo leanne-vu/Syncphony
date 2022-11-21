@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
   swapViews(data.view);
   selectionLoop(data);
   entryLoop();
+  data.editing = null;
 }
 );
 
@@ -174,9 +175,13 @@ $form.addEventListener('submit', function () {
           notes: $form.elements.notes.value,
           entryID: data.genre[data.currentGenre][z].entryID
         };
-        // data.genre[data.currentGenre][z] = data.editing;
-        // var $list = document.querySelector('li');
-        // for (var k=0 ; k <)
+        data.genre[data.currentGenre][z] = data.editing;
+        var $list = document.querySelectorAll('li');
+        for (var k = 0; k < $list.length; k++) {
+          if (Math.floor($list[k].getAttribute('data-entry-id')) === data.genre[data.currentGenre][z].entryID) {
+            $list[k].replaceWith(renderEntries(data.genre[data.currentGenre][z]));
+          }
+        }
       }
     }
   }
@@ -196,6 +201,7 @@ $form.addEventListener('submit', function () {
   swapViews('genreView');
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+  data.editing = null;
 });
 
 var $imageUrl = document.querySelector('#image-url');
