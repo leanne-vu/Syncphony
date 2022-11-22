@@ -129,15 +129,24 @@ $selectionList.addEventListener('click', function () {
   if (event.target.className === 'fa-solid fa-trash-can second sel-trash') {
     var $containermodal = document.querySelector('.container-modal');
     $containermodal.setAttribute('class', 'container-modal');
+    data.currentGenre = genreName;
   }
 });
 
 var $modal = document.querySelector('.pop-out');
 $modal.addEventListener('click', function () {
-  if (event.target.className === 'pop-but cancel-but') {
-    var $containermodal = document.querySelector('.container-modal');
-    $containermodal.setAttribute('class', 'hidden container-modal');
+  if (event.target.className === 'pop-but confirm-but') {
+    var $genrelist = document.querySelectorAll('.genreList');
+    for (var z = 0; z < $genrelist.length; z++) {
+      if ($genrelist[z].getAttribute('data-genre') === data.currentGenre) {
+        $genrelist[z].remove();
+        delete data.genre[data.currentGenre];
+      }
+    }
   }
+  var $containermodal = document.querySelector('.container-modal');
+  $containermodal.setAttribute('class', 'hidden container-modal');
+  data.currentGenre = null;
 });
 document.addEventListener('DOMContentLoaded', function () {
   var $specificGenre = document.querySelector('.specific-genre');
