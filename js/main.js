@@ -132,6 +132,13 @@ $selectionList.addEventListener('click', function () {
   }
 });
 
+var $modal = document.querySelector('.pop-out');
+$modal.addEventListener('click', function () {
+  if (event.target.className === 'pop-but cancel-but') {
+    var $containermodal = document.querySelector('.container-modal');
+    $containermodal.setAttribute('class', 'hidden container-modal');
+  }
+});
 document.addEventListener('DOMContentLoaded', function () {
   var $specificGenre = document.querySelector('.specific-genre');
   $specificGenre.textContent = data.currentGenre;
