@@ -314,6 +314,7 @@ select {
 }
 
 .star-column {
+  margin-left: 75px;
   margin-top: 10px;
   font-size: 20pt;
 }
@@ -330,4 +331,67 @@ select {
   width: 35px;
   height: 35px;
   font-size: 15pt;
+  margin-right: 10px;
+}
+
+.ent-trash {
+  float: right;
+  border-radius: 4px;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  color: #6d9886;
+  width: 35px;
+  height: 35px;
+  font-size: 15pt;
+}
+
+.container {
+  position: relative;
+}
+
+.container-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgb(0 0 0/ 50%);
+}
+
+.pop-out {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  width: 375px;
+  height: 145px;
+  font-family: Raleway, sans-serif;
+}
+
+.pop-but {
+  height: 30px;
+  width: 90px;
+  margin-top: 25px;
+  border: none;
+  border-radius: 4px;
+}
+
+.cancel-but {
+  background-color: #393e46;
+  color: white;
+}
+
+.confirm-but {
+  background-color: #6d9886;
+  color: white;
+  float: right;
+}
+
+.pop-words {
+  margin-top: 25px;
 }
