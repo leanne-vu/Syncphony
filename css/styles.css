@@ -314,11 +314,27 @@ select {
 }
 
 .star-column {
+  margin-left: 75px;
   margin-top: 10px;
   font-size: 20pt;
 }
 
 .fa-pencil {
+  float: right;
+  border-radius: 4px;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  color: #6d9886;
+  width: 35px;
+  height: 35px;
+  font-size: 15pt;
+  margin-right: 10px;
+}
+
+.ent-trash {
   float: right;
   border-radius: 4px;
   justify-content: center;
