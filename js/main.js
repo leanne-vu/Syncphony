@@ -171,7 +171,20 @@ $genreSpecific.addEventListener('click', function () {
 if (data.view !== 'genreView' && data.view !== 'entry-form') {
   data.currentGenre = null;
 }
-
+var $entryformstar = document.querySelector('.entry-form-stars');
+$entryformstar.addEventListener('click', function () {
+  var $stars = document.querySelectorAll('.ent-form-stars');
+  for (var i = 0; i < $stars.length; i++) {
+    if (event.target === $stars[i]) {
+      for (var z = 0; z <= i; z++) {
+        $stars[z].setAttribute('class', 'fa-solid fa-star ent-form-stars rated');
+      }
+      for (var q = i + 1; q < $stars.length; q++) {
+        $stars[q].setAttribute('class', 'fa-solid fa-star ent-form-stars');
+      }
+    }
+  }
+});
 var $form = document.querySelector('form');
 $form.addEventListener('submit', function () {
   event.preventDefault();
