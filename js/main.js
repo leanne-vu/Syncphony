@@ -294,22 +294,30 @@ $backButton.addEventListener('click', function () {
 
 var $genreAdds = document.querySelector('#genre-adds');
 $genreAdds.addEventListener('click', function () {
-  if (event.target.className === 'fa-solid fa-pencil') { swapViews('entry-form'); }
-  var $specificGenreEntry = document.querySelector('.specific-genre-entry');
-  $specificGenreEntry.textContent = 'Entry Edit';
   var listItem = event.target.closest('li');
   var entryStringNum = listItem.getAttribute('data-entry-id');
   var entryNumber = Math.floor(entryStringNum);
   for (var i = 0; i < data.genre[data.currentGenre].length; i++) {
     if (data.genre[data.currentGenre][i].entryID === entryNumber) {
-      data.editing = data.genre[data.currentGenre][i];
-      $form.elements.artist.value = data.genre[data.currentGenre][i].artist;
-      $form.elements.select.value = data.genre[data.currentGenre][i].type;
-      $form.elements.url.value = data.genre[data.currentGenre][i].url;
-      $form.elements.title.value = data.genre[data.currentGenre][i].title;
-      $form.elements.notes.value = data.genre[data.currentGenre][i].notes;
-      var $image = document.querySelector('.form-image');
-      $image.setAttribute('src', data.genre[data.currentGenre][i].url);
+      if (event.target.className === 'fa-solid fa-pencil') {
+        swapViews('entry-form');
+        var $specificGenreEntry = document.querySelector('.specific-genre-entry');
+        $specificGenreEntry.textContent = 'Entry Edit';
+        data.editing = data.genre[data.currentGenre][i];
+        $form.elements.artist.value = data.genre[data.currentGenre][i].artist;
+        $form.elements.select.value = data.genre[data.currentGenre][i].type;
+        $form.elements.url.value = data.genre[data.currentGenre][i].url;
+        $form.elements.title.value = data.genre[data.currentGenre][i].title;
+        $form.elements.notes.value = data.genre[data.currentGenre][i].notes;
+        var $image = document.querySelector('.form-image');
+        $image.setAttribute('src', data.genre[data.currentGenre][i].url);
+      }
+      if (event.target.className === 'fa-solid fa-trash-can ent-trash') {
+        var $li = document.querySelectorAll('.entry-list-spec');
+        $li[i].remove();
+        data.genre[data.currentGenre].splice(i, 1);
+      }
+
     }
   }
 });
