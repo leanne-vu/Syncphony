@@ -194,7 +194,8 @@ $form.addEventListener('submit', function () {
     type: $form.elements.select.value,
     title: $form.elements.title.value,
     notes: $form.elements.notes.value,
-    entryID: data.entryID
+    entryID: data.entryID,
+    rating: 0
   };
   if (data.editing !== null) {
     for (var z = 0; z < data.genre[data.currentGenre].length; z++) {
@@ -229,6 +230,12 @@ $form.addEventListener('submit', function () {
       }
     }
   }
+  var $ratedstars = document.querySelectorAll('.rated');
+  entry.rating += $ratedstars.length;
+  // var $entrylist = document.querySelectorAll('.entry-list-spec');
+  // if (Math.floor($entrylist.getAttribute('data-entry-id')) === entry.rating) {
+  //   console.log('hello');
+  // }
   $form.reset();
   swapViews('genreView');
   var $image = document.querySelector('.form-image');
