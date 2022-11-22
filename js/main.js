@@ -125,7 +125,11 @@ $selectionList.addEventListener('click', function () {
     $li[e].remove();
   }
   entryLoop();
-// add DELETE here later //
+
+  if (event.target.className === 'fa-solid fa-trash-can second sel-trash') {
+    var $containermodal = document.querySelector('.container-modal');
+    $containermodal.setAttribute('class', 'container-modal');
+  }
 });
 
 document.addEventListener('DOMContentLoaded', function () {
