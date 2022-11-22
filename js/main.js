@@ -125,9 +125,29 @@ $selectionList.addEventListener('click', function () {
     $li[e].remove();
   }
   entryLoop();
-// add DELETE here later //
+
+  if (event.target.className === 'fa-solid fa-trash-can second sel-trash') {
+    var $containermodal = document.querySelector('.container-modal');
+    $containermodal.setAttribute('class', 'container-modal');
+    data.currentGenre = genreName;
+  }
 });
 
+var $modal = document.querySelector('.pop-out');
+$modal.addEventListener('click', function () {
+  if (event.target.className === 'pop-but confirm-but') {
+    var $genrelist = document.querySelectorAll('.genreList');
+    for (var z = 0; z < $genrelist.length; z++) {
+      if ($genrelist[z].getAttribute('data-genre') === data.currentGenre) {
+        $genrelist[z].remove();
+        delete data.genre[data.currentGenre];
+      }
+    }
+  }
+  var $containermodal = document.querySelector('.container-modal');
+  $containermodal.setAttribute('class', 'hidden container-modal');
+  data.currentGenre = null;
+});
 document.addEventListener('DOMContentLoaded', function () {
   var $specificGenre = document.querySelector('.specific-genre');
   $specificGenre.textContent = data.currentGenre;
@@ -260,9 +280,13 @@ function renderEntries(individualGenre) {
   var $star5 = document.createElement('i');
   $star5.setAttribute('class', 'fa-solid fa-star ent-star');
   $starColumn.appendChild($star5);
+  var $deletecan = document.createElement('i');
+  $deletecan.setAttribute('class', 'fa-solid fa-trash-can ent-trash');
+  $starColumn.appendChild($deletecan);
   var $edit = document.createElement('i');
   $edit.setAttribute('class', 'fa-solid fa-pencil');
   $starColumn.appendChild($edit);
+
   return $li;
 }
 
@@ -290,22 +314,30 @@ $backButton.addEventListener('click', function () {
 
 var $genreAdds = document.querySelector('#genre-adds');
 $genreAdds.addEventListener('click', function () {
-  if (event.target.className === 'fa-solid fa-pencil') { swapViews('entry-form'); }
-  var $specificGenreEntry = document.querySelector('.specific-genre-entry');
-  $specificGenreEntry.textContent = 'Entry Edit';
   var listItem = event.target.closest('li');
   var entryStringNum = listItem.getAttribute('data-entry-id');
   var entryNumber = Math.floor(entryStringNum);
   for (var i = 0; i < data.genre[data.currentGenre].length; i++) {
     if (data.genre[data.currentGenre][i].entryID === entryNumber) {
-      data.editing = data.genre[data.currentGenre][i];
-      $form.elements.artist.value = data.genre[data.currentGenre][i].artist;
-      $form.elements.select.value = data.genre[data.currentGenre][i].type;
-      $form.elements.url.value = data.genre[data.currentGenre][i].url;
-      $form.elements.title.value = data.genre[data.currentGenre][i].title;
-      $form.elements.notes.value = data.genre[data.currentGenre][i].notes;
-      var $image = document.querySelector('.form-image');
-      $image.setAttribute('src', data.genre[data.currentGenre][i].url);
+      if (event.target.className === 'fa-solid fa-pencil') {
+        swapViews('entry-form');
+        var $specificGenreEntry = document.querySelector('.specific-genre-entry');
+        $specificGenreEntry.textContent = 'Entry Edit';
+        data.editing = data.genre[data.currentGenre][i];
+        $form.elements.artist.value = data.genre[data.currentGenre][i].artist;
+        $form.elements.select.value = data.genre[data.currentGenre][i].type;
+        $form.elements.url.value = data.genre[data.currentGenre][i].url;
+        $form.elements.title.value = data.genre[data.currentGenre][i].title;
+        $form.elements.notes.value = data.genre[data.currentGenre][i].notes;
+        var $image = document.querySelector('.form-image');
+        $image.setAttribute('src', data.genre[data.currentGenre][i].url);
+      }
+      if (event.target.className === 'fa-solid fa-trash-can ent-trash') {
+        var $li = document.querySelectorAll('.entry-list-spec');
+        $li[i].remove();
+        data.genre[data.currentGenre].splice(i, 1);
+      }
+
     }
   }
 });
