@@ -177,7 +177,7 @@ $entryformstar.addEventListener('click', function () {
   for (var i = 0; i < $stars.length; i++) {
     if (event.target === $stars[i]) {
       for (var z = 0; z <= i; z++) {
-        $stars[z].setAttribute('class', 'fa-solid fa-star ent-form-stars rated');
+        $stars[z].setAttribute('class', 'fa-solid fa-star ent-form-stars rated-form');
       }
       for (var q = i + 1; q < $stars.length; q++) {
         $stars[q].setAttribute('class', 'fa-solid fa-star ent-form-stars');
@@ -206,13 +206,16 @@ $form.addEventListener('submit', function () {
           type: $form.elements.select.value,
           title: $form.elements.title.value,
           notes: $form.elements.notes.value,
-          entryID: data.genre[data.currentGenre][z].entryID
+          entryID: data.genre[data.currentGenre][z].entryID,
+          rating: 0
         };
+        var $ratedstars = document.querySelectorAll('.rated-form');
+        data.editing.rating += $ratedstars.length;
         data.genre[data.currentGenre][z] = data.editing;
         var $list = document.querySelectorAll('.entry-list-spec');
         for (var k = 0; k < $list.length; k++) {
           if (Math.floor($list[k].getAttribute('data-entry-id')) === data.genre[data.currentGenre][z].entryID) {
-            $list[k].replaceWith(renderEntries(data.genre[data.currentGenre][z]));
+            $list[k].replaceWith(renderEntries(data.genre[data.currentGenre][z], data.genre[data.currentGenre][z].rating));
           }
         }
       }
@@ -223,25 +226,30 @@ $form.addEventListener('submit', function () {
     var genreArray = Object.keys(data.genre);
     for (var i = 0; i < genreArray.length; i++) {
       if (genreArray[i] === data.currentGenre) {
+        var $ratedstars = document.querySelectorAll('.rated-form');
+        entry.rating += $ratedstars.length;
         data.genre[genreArray[i]].unshift(entry);
         var $ul = document.querySelector('#genre-adds');
-        $ul.prepend(renderEntries(entry));
+        $ul.prepend(renderEntries(entry, entry.rating));
         data.entryID++;
       }
     }
   }
-  var $ratedstars = document.querySelectorAll('.rated');
-  entry.rating += $ratedstars.length;
-  // var $entrylist = document.querySelectorAll('.entry-list-spec');
-  // if (Math.floor($entrylist.getAttribute('data-entry-id')) === entry.rating) {
-  //   console.log('hello');
-  // }
+  resetStars();
   $form.reset();
   swapViews('genreView');
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.editing = null;
+
 });
+
+function resetStars() {
+  var $entrystars = document.querySelectorAll('.ent-form-stars');
+  for (var i = 0; i < $entrystars.length; i++) {
+    $entrystars[i].setAttribute('class', 'fa-solid fa-star ent-form-stars');
+  }
+}
 
 var $imageUrl = document.querySelector('#image-url');
 $imageUrl.addEventListener('input', function () {
@@ -250,7 +258,7 @@ $imageUrl.addEventListener('input', function () {
 }
 );
 
-function renderEntries(individualGenre) {
+function renderEntries(individualGenre, number) {
   var $li = document.createElement('li');
   $li.setAttribute('class', 'entry-list-spec');
   $li.setAttribute('data-entry-id', individualGenre.entryID);
@@ -285,21 +293,7 @@ function renderEntries(individualGenre) {
   var $starColumn = document.createElement('div');
   $starColumn.setAttribute('class', 'star-column column-full');
   $second2ndRow.appendChild($starColumn);
-  var $star1 = document.createElement('i');
-  $star1.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star1);
-  var $star2 = document.createElement('i');
-  $star2.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star2);
-  var $star3 = document.createElement('i');
-  $star3.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star3);
-  var $star4 = document.createElement('i');
-  $star4.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star4);
-  var $star5 = document.createElement('i');
-  $star5.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star5);
+  $starColumn.appendChild(renderEntryStars(number));
   var $deletecan = document.createElement('i');
   $deletecan.setAttribute('class', 'fa-solid fa-trash-can ent-trash');
   $starColumn.appendChild($deletecan);
@@ -308,6 +302,21 @@ function renderEntries(individualGenre) {
   $starColumn.appendChild($edit);
 
   return $li;
+}
+
+function renderEntryStars(number) {
+  var fragment = new DocumentFragment();
+  for (var z = 0; z <= 5; z++) {
+    var star = document.createElement('i');
+    if (z < number) {
+      star.setAttribute('class', 'fa-solid fa-star ent-star rated');
+    }
+    if (z > number) {
+      star.setAttribute('class', 'fa-solid fa-star ent-star');
+    }
+    fragment.appendChild(star);
+  }
+  return fragment;
 }
 
 function entryLoop() {
@@ -351,6 +360,7 @@ $genreAdds.addEventListener('click', function () {
         $form.elements.notes.value = data.genre[data.currentGenre][i].notes;
         var $image = document.querySelector('.form-image');
         $image.setAttribute('src', data.genre[data.currentGenre][i].url);
+        editstars();
       }
       if (event.target.className === 'fa-solid fa-trash-can ent-trash') {
         var $li = document.querySelectorAll('.entry-list-spec');
@@ -364,4 +374,12 @@ $genreAdds.addEventListener('click', function () {
 var $specificGenreEntry = document.querySelector('.specific-genre-entry');
 if (data.view !== 'entry-form' || $specificGenreEntry.textContent !== 'Entry Edit') {
   data.editing = null;
+}
+function editstars() {
+  for (var i = 0; i < data.genre[data.currentGenre].length; i++) {
+    var $entrystars = document.querySelectorAll('.ent-form-stars');
+    for (var k = 0; k <= data.genre[data.currentGenre][i].rating - 1; k++) {
+      $entrystars[k].setAttribute('class', 'fa-solid fa-star ent-form-stars rated-form');
+    }
+  }
 }

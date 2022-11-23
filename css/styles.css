@@ -102,6 +102,10 @@ button:hover {
 }
 
 /* star ratings */
+.rated-form {
+  color: #f2e7d5;
+}
+
 .rated {
   color: #f2e7d5;
 }
