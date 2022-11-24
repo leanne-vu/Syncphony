@@ -210,7 +210,7 @@ $form.addEventListener('submit', function () {
           rating: 0
         };
         var $ratedstars = document.querySelectorAll('.rated-form');
-        data.editing.rating += $ratedstars.length;
+        data.editing.rating = $ratedstars.length;
         data.genre[data.currentGenre][z] = data.editing;
         var $list = document.querySelectorAll('.entry-list-spec');
         for (var k = 0; k < $list.length; k++) {
@@ -226,8 +226,8 @@ $form.addEventListener('submit', function () {
     var genreArray = Object.keys(data.genre);
     for (var i = 0; i < genreArray.length; i++) {
       if (genreArray[i] === data.currentGenre) {
-        var $ratedstars = document.querySelectorAll('.rated-form');
-        entry.rating += $ratedstars.length;
+        $ratedstars = document.querySelectorAll('.rated-form');
+        entry.rating = $ratedstars.length;
         data.genre[genreArray[i]].unshift(entry);
         var $ul = document.querySelector('#genre-adds');
         $ul.prepend(renderEntries(entry, entry.rating));
@@ -241,7 +241,6 @@ $form.addEventListener('submit', function () {
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.editing = null;
-
 });
 
 function resetStars() {
@@ -325,7 +324,7 @@ function entryLoop() {
   for (var i = 0; i < genreArray.length; i++) {
     if (genreArray[i] === data.currentGenre) {
       for (var z = 0; z < data.genre[genreArray[i]].length; z++) {
-        var all = renderEntries(data.genre[genreArray[i]][z]);
+        var all = renderEntries(data.genre[genreArray[i]][z], data.genre[genreArray[i]][z].rating);
         $ul.appendChild(all);
       }
     }
@@ -339,6 +338,7 @@ $backButton.addEventListener('click', function () {
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.editing = null;
+  resetStars();
 });
 
 var $genreAdds = document.querySelector('#genre-adds');
@@ -378,8 +378,10 @@ if (data.view !== 'entry-form' || $specificGenreEntry.textContent !== 'Entry Edi
 function editstars() {
   for (var i = 0; i < data.genre[data.currentGenre].length; i++) {
     var $entrystars = document.querySelectorAll('.ent-form-stars');
-    for (var k = 0; k <= data.genre[data.currentGenre][i].rating - 1; k++) {
-      $entrystars[k].setAttribute('class', 'fa-solid fa-star ent-form-stars rated-form');
+    if (data.editing.entryID === data.genre[data.currentGenre][i].entryID) {
+      for (var k = 0; k <= data.genre[data.currentGenre][i].rating - 1; k++) {
+        $entrystars[k].setAttribute('class', 'fa-solid fa-star ent-form-stars rated-form');
+      }
     }
   }
 }
