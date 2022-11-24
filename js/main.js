@@ -144,9 +144,9 @@ $selectionList.addEventListener('click', function () {
               $genrestars[p].className = 'fa-solid fa-star gen-rated rated';
             } else $genrestars[p].className = 'fa-solid fa-star gen-rated';
           }
+          data.genreRatings[$genrate[m].getAttribute('data-genre')] = x + 1;
         }
       }
-
     }
   }
 
