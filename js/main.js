@@ -57,7 +57,8 @@ function renderSelections(render) {
   $li.appendChild($addBut);
 
   var $divRow = document.createElement('div');
-  $divRow.setAttribute('class', 'row');
+  $divRow.setAttribute('class', 'row selection-rating-row');
+  $divRow.setAttribute('data-genre', render);
   $li.appendChild($divRow);
   var $icon1 = document.createElement('i');
   $icon1.className = 'fa-solid fa-star gen-rate';
@@ -115,23 +116,43 @@ $returnButton.addEventListener('click', function () {
 });
 
 $selectionList.addEventListener('click', function () {
-  if (event.target.className === 'fa-regular fa-plus second') { swapViews('genreView'); }
-  var $specificGenre = document.querySelector('.specific-genre');
-  var genreName = event.target.closest('li').textContent;
-  $specificGenre.textContent = genreName;
-  data.currentGenre = genreName;
-  var $li = document.querySelectorAll('.entry-list-spec');
-  for (var e = 0; e < $li.length; e++) {
-    $li[e].remove();
+  if (event.target.className === 'fa-regular fa-plus second') {
+    swapViews('genreView');
+    var $specificGenre = document.querySelector('.specific-genre');
+    var genreName = event.target.closest('li').textContent;
+    $specificGenre.textContent = genreName;
+    data.currentGenre = genreName;
+    var $li = document.querySelectorAll('.entry-list-spec');
+    for (var e = 0; e < $li.length; e++) {
+      $li[e].remove();
+    }
+    entryLoop();
   }
-  entryLoop();
-
   if (event.target.className === 'fa-solid fa-trash-can second sel-trash') {
     var $containermodal = document.querySelector('.container-modal');
     $containermodal.setAttribute('class', 'container-modal');
     data.currentGenre = genreName;
   }
-});
+  var $genrate = document.querySelectorAll('.selection-rating-row');
+  for (var m = 0; m < $genrate.length; m++) {
+    if ($genrate[m].getAttribute('data-genre') === event.target.closest('li').getAttribute('data-genre')) {
+      var $genrestars = $genrate[m].children;
+      for (var x = 0; x < $genrestars.length; x++) {
+        if ($genrestars[x] === event.target) {
+          for (var p = 0; p < $genrestars.length; p++) {
+            if (p <= x) {
+              $genrestars[p].className = 'fa-solid fa-star gen-rated rated';
+            } else $genrestars[p].className = 'fa-solid fa-star gen-rated';
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+);
 
 var $modal = document.querySelector('.pop-out');
 $modal.addEventListener('click', function () {
