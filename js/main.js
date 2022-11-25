@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
   selectionLoop(data);
   entryLoop();
   data.editing = null;
+  selectionstars();
 }
 );
 
@@ -149,10 +150,22 @@ $selectionList.addEventListener('click', function () {
       }
     }
   }
-
 }
-
 );
+
+function selectionstars() {
+  var $genrate = document.querySelectorAll('.selection-rating-row');
+  var datamodel = Object.keys(data.genreRatings);
+  for (var i = 0; i < datamodel.length; i++) {
+    if (datamodel[i] === $genrate[i].getAttribute('data-genre')) {
+      var stars = $genrate[i].children;
+      var rating = data.genreRatings[datamodel[i]];
+      for (var x = 0; x < stars.length; x++) {
+        if (x < rating) { stars[x].className = 'fa-solid fa-star gen-rate rated'; }
+      }
+    }
+  }
+}
 
 var $modal = document.querySelector('.pop-out');
 $modal.addEventListener('click', function () {
