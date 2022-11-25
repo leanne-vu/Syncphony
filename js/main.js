@@ -132,6 +132,7 @@ $selectionList.addEventListener('click', function () {
   if (event.target.className === 'fa-solid fa-trash-can second sel-trash') {
     var $containermodal = document.querySelector('.container-modal');
     $containermodal.setAttribute('class', 'container-modal');
+    genreName = event.target.closest('li').textContent;
     data.currentGenre = genreName;
   }
   var $genrate = document.querySelectorAll('.selection-rating-row');
@@ -175,6 +176,7 @@ $modal.addEventListener('click', function () {
       if ($genrelist[z].getAttribute('data-genre') === data.currentGenre) {
         $genrelist[z].remove();
         delete data.genre[data.currentGenre];
+        delete data.genreRatings[data.currentGenre];
       }
     }
   }
