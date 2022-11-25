@@ -4,7 +4,8 @@ var data = {
   currentGenre: '',
   entryID: 0,
   editing: null,
-  genre: {}
+  genre: {},
+  genreRatings: {}
 };
 
 var previousDataJSON = localStorage.getItem('genre-storage');

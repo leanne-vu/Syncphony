@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
   selectionLoop(data);
   entryLoop();
   data.editing = null;
+  selectionstars();
 }
 );
 
@@ -57,7 +58,8 @@ function renderSelections(render) {
   $li.appendChild($addBut);
 
   var $divRow = document.createElement('div');
-  $divRow.setAttribute('class', 'row');
+  $divRow.setAttribute('class', 'row selection-rating-row');
+  $divRow.setAttribute('data-genre', render);
   $li.appendChild($divRow);
   var $icon1 = document.createElement('i');
   $icon1.className = 'fa-solid fa-star gen-rate';
@@ -115,23 +117,56 @@ $returnButton.addEventListener('click', function () {
 });
 
 $selectionList.addEventListener('click', function () {
-  if (event.target.className === 'fa-regular fa-plus second') { swapViews('genreView'); }
-  var $specificGenre = document.querySelector('.specific-genre');
-  var genreName = event.target.closest('li').textContent;
-  $specificGenre.textContent = genreName;
-  data.currentGenre = genreName;
-  var $li = document.querySelectorAll('.entry-list-spec');
-  for (var e = 0; e < $li.length; e++) {
-    $li[e].remove();
+  if (event.target.className === 'fa-regular fa-plus second') {
+    swapViews('genreView');
+    var $specificGenre = document.querySelector('.specific-genre');
+    var genreName = event.target.closest('li').textContent;
+    $specificGenre.textContent = genreName;
+    data.currentGenre = genreName;
+    var $li = document.querySelectorAll('.entry-list-spec');
+    for (var e = 0; e < $li.length; e++) {
+      $li[e].remove();
+    }
+    entryLoop();
   }
-  entryLoop();
-
   if (event.target.className === 'fa-solid fa-trash-can second sel-trash') {
     var $containermodal = document.querySelector('.container-modal');
     $containermodal.setAttribute('class', 'container-modal');
+    genreName = event.target.closest('li').textContent;
     data.currentGenre = genreName;
   }
-});
+  var $genrate = document.querySelectorAll('.selection-rating-row');
+  for (var m = 0; m < $genrate.length; m++) {
+    if ($genrate[m].getAttribute('data-genre') === event.target.closest('li').getAttribute('data-genre')) {
+      var $genrestars = $genrate[m].children;
+      for (var x = 0; x < $genrestars.length; x++) {
+        if ($genrestars[x] === event.target) {
+          for (var p = 0; p < $genrestars.length; p++) {
+            if (p <= x) {
+              $genrestars[p].className = 'fa-solid fa-star gen-rated rated';
+            } else $genrestars[p].className = 'fa-solid fa-star gen-rated';
+          }
+          data.genreRatings[$genrate[m].getAttribute('data-genre')] = x + 1;
+        }
+      }
+    }
+  }
+}
+);
+
+function selectionstars() {
+  var $genrate = document.querySelectorAll('.selection-rating-row');
+  var datamodel = Object.keys(data.genreRatings);
+  for (var i = 0; i < datamodel.length; i++) {
+    if (datamodel[i] === $genrate[i].getAttribute('data-genre')) {
+      var stars = $genrate[i].children;
+      var rating = data.genreRatings[datamodel[i]];
+      for (var x = 0; x < stars.length; x++) {
+        if (x < rating) { stars[x].className = 'fa-solid fa-star gen-rate rated'; }
+      }
+    }
+  }
+}
 
 var $modal = document.querySelector('.pop-out');
 $modal.addEventListener('click', function () {
@@ -141,6 +176,7 @@ $modal.addEventListener('click', function () {
       if ($genrelist[z].getAttribute('data-genre') === data.currentGenre) {
         $genrelist[z].remove();
         delete data.genre[data.currentGenre];
+        delete data.genreRatings[data.currentGenre];
       }
     }
   }
@@ -171,7 +207,20 @@ $genreSpecific.addEventListener('click', function () {
 if (data.view !== 'genreView' && data.view !== 'entry-form') {
   data.currentGenre = null;
 }
-
+var $entryformstar = document.querySelector('.entry-form-stars');
+$entryformstar.addEventListener('click', function () {
+  var $stars = document.querySelectorAll('.ent-form-stars');
+  for (var i = 0; i < $stars.length; i++) {
+    if (event.target === $stars[i]) {
+      for (var z = 0; z <= i; z++) {
+        $stars[z].setAttribute('class', 'fa-solid fa-star ent-form-stars rated-form');
+      }
+      for (var q = i + 1; q < $stars.length; q++) {
+        $stars[q].setAttribute('class', 'fa-solid fa-star ent-form-stars');
+      }
+    }
+  }
+});
 var $form = document.querySelector('form');
 $form.addEventListener('submit', function () {
   event.preventDefault();
@@ -181,7 +230,8 @@ $form.addEventListener('submit', function () {
     type: $form.elements.select.value,
     title: $form.elements.title.value,
     notes: $form.elements.notes.value,
-    entryID: data.entryID
+    entryID: data.entryID,
+    rating: 0
   };
   if (data.editing !== null) {
     for (var z = 0; z < data.genre[data.currentGenre].length; z++) {
@@ -192,13 +242,16 @@ $form.addEventListener('submit', function () {
           type: $form.elements.select.value,
           title: $form.elements.title.value,
           notes: $form.elements.notes.value,
-          entryID: data.genre[data.currentGenre][z].entryID
+          entryID: data.genre[data.currentGenre][z].entryID,
+          rating: 0
         };
+        var $ratedstars = document.querySelectorAll('.rated-form');
+        data.editing.rating = $ratedstars.length;
         data.genre[data.currentGenre][z] = data.editing;
         var $list = document.querySelectorAll('.entry-list-spec');
         for (var k = 0; k < $list.length; k++) {
           if (Math.floor($list[k].getAttribute('data-entry-id')) === data.genre[data.currentGenre][z].entryID) {
-            $list[k].replaceWith(renderEntries(data.genre[data.currentGenre][z]));
+            $list[k].replaceWith(renderEntries(data.genre[data.currentGenre][z], data.genre[data.currentGenre][z].rating));
           }
         }
       }
@@ -209,19 +262,29 @@ $form.addEventListener('submit', function () {
     var genreArray = Object.keys(data.genre);
     for (var i = 0; i < genreArray.length; i++) {
       if (genreArray[i] === data.currentGenre) {
+        $ratedstars = document.querySelectorAll('.rated-form');
+        entry.rating = $ratedstars.length;
         data.genre[genreArray[i]].unshift(entry);
         var $ul = document.querySelector('#genre-adds');
-        $ul.prepend(renderEntries(entry));
+        $ul.prepend(renderEntries(entry, entry.rating));
         data.entryID++;
       }
     }
   }
+  resetStars();
   $form.reset();
   swapViews('genreView');
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.editing = null;
 });
+
+function resetStars() {
+  var $entrystars = document.querySelectorAll('.ent-form-stars');
+  for (var i = 0; i < $entrystars.length; i++) {
+    $entrystars[i].setAttribute('class', 'fa-solid fa-star ent-form-stars');
+  }
+}
 
 var $imageUrl = document.querySelector('#image-url');
 $imageUrl.addEventListener('input', function () {
@@ -230,7 +293,7 @@ $imageUrl.addEventListener('input', function () {
 }
 );
 
-function renderEntries(individualGenre) {
+function renderEntries(individualGenre, number) {
   var $li = document.createElement('li');
   $li.setAttribute('class', 'entry-list-spec');
   $li.setAttribute('data-entry-id', individualGenre.entryID);
@@ -265,21 +328,7 @@ function renderEntries(individualGenre) {
   var $starColumn = document.createElement('div');
   $starColumn.setAttribute('class', 'star-column column-full');
   $second2ndRow.appendChild($starColumn);
-  var $star1 = document.createElement('i');
-  $star1.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star1);
-  var $star2 = document.createElement('i');
-  $star2.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star2);
-  var $star3 = document.createElement('i');
-  $star3.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star3);
-  var $star4 = document.createElement('i');
-  $star4.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star4);
-  var $star5 = document.createElement('i');
-  $star5.setAttribute('class', 'fa-solid fa-star ent-star');
-  $starColumn.appendChild($star5);
+  $starColumn.appendChild(renderEntryStars(number));
   var $deletecan = document.createElement('i');
   $deletecan.setAttribute('class', 'fa-solid fa-trash-can ent-trash');
   $starColumn.appendChild($deletecan);
@@ -290,13 +339,28 @@ function renderEntries(individualGenre) {
   return $li;
 }
 
+function renderEntryStars(number) {
+  var fragment = new DocumentFragment();
+  for (var z = 0; z <= 5; z++) {
+    var star = document.createElement('i');
+    if (z < number) {
+      star.setAttribute('class', 'fa-solid fa-star ent-star rated');
+    }
+    if (z > number) {
+      star.setAttribute('class', 'fa-solid fa-star ent-star');
+    }
+    fragment.appendChild(star);
+  }
+  return fragment;
+}
+
 function entryLoop() {
   var $ul = document.querySelector('#genre-adds');
   var genreArray = Object.keys(data.genre);
   for (var i = 0; i < genreArray.length; i++) {
     if (genreArray[i] === data.currentGenre) {
       for (var z = 0; z < data.genre[genreArray[i]].length; z++) {
-        var all = renderEntries(data.genre[genreArray[i]][z]);
+        var all = renderEntries(data.genre[genreArray[i]][z], data.genre[genreArray[i]][z].rating);
         $ul.appendChild(all);
       }
     }
@@ -310,6 +374,7 @@ $backButton.addEventListener('click', function () {
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.editing = null;
+  resetStars();
 });
 
 var $genreAdds = document.querySelector('#genre-adds');
@@ -331,6 +396,7 @@ $genreAdds.addEventListener('click', function () {
         $form.elements.notes.value = data.genre[data.currentGenre][i].notes;
         var $image = document.querySelector('.form-image');
         $image.setAttribute('src', data.genre[data.currentGenre][i].url);
+        editstars();
       }
       if (event.target.className === 'fa-solid fa-trash-can ent-trash') {
         var $li = document.querySelectorAll('.entry-list-spec');
@@ -344,4 +410,14 @@ $genreAdds.addEventListener('click', function () {
 var $specificGenreEntry = document.querySelector('.specific-genre-entry');
 if (data.view !== 'entry-form' || $specificGenreEntry.textContent !== 'Entry Edit') {
   data.editing = null;
+}
+function editstars() {
+  for (var i = 0; i < data.genre[data.currentGenre].length; i++) {
+    var $entrystars = document.querySelectorAll('.ent-form-stars');
+    if (data.editing.entryID === data.genre[data.currentGenre][i].entryID) {
+      for (var k = 0; k <= data.genre[data.currentGenre][i].rating - 1; k++) {
+        $entrystars[k].setAttribute('class', 'fa-solid fa-star ent-form-stars rated-form');
+      }
+    }
+  }
 }

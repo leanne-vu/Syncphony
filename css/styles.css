@@ -68,7 +68,6 @@ button:hover {
   border-bottom: 1px solid #f2e7d5;
 }
 
-/* add buttons on generator page */
 .first {
   float: right;
   margin-top: 10px;
@@ -101,7 +100,10 @@ button:hover {
   letter-spacing: 5px;
 }
 
-/* star ratings */
+.rated-form {
+  color: #f2e7d5;
+}
+
 .rated {
   color: #f2e7d5;
 }
