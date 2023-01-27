@@ -29,7 +29,7 @@ https://leanne-vu.github.io/ajax-project/
 #### How to add genre and rate
 ![ How to add genre and rate ](/gifs/first.gif)
 #### How to add a track/album to  genre
-![ How to add a track/album to genre ](/gifs/second.gif)
+![ How to add a track/album to genre ](/gifs/path.gif)
 
 ## Stretch Features[![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)](#pin)
 * Implement feature for user to get  search result previews of genres that are generated.
