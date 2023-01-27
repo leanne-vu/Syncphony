@@ -8,7 +8,7 @@ Syncphony is a JavaScript web application for musical lovers who want to discove
 As an avid music lover, I wanted to build an application that would allow me to be more adventurous in my musical journey. Something I love doing is listening to random playlists on shuffle to find new tracks. This inspired me to bring this concept to musical genres, with a rating system for both genre and tracks for a more hands-on experience in discovery!
 
 ## Check it out here!
-https://leanne-vu.github.io/ajax-project/
+https://leanne-vu.github.io/Syncphony/
 
 ## Technologies[![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)](#pin)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
