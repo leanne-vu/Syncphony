@@ -55,7 +55,7 @@ https://leanne-vu.github.io/ajax-project/
         - data.js
         - main.js
     - images (directory)
-        -placeholder-image-square.jpg
+        - placeholder-image-square.jpg
 
 2. Install all dependencies with NPM or copy package.json
 
