@@ -63,4 +63,4 @@ https://leanne-vu.github.io/ajax-project/
     npm install
     ```
 
-3. Start the project. Once started you can view the application by opening http://localhost:5500 in your browser.
+3. Start the project. You may open the project using live server or your chosen program to serve the files.
