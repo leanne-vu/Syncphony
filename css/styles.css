@@ -397,3 +397,7 @@ select {
 .pop-words {
   margin-top: 25px;
 }
+
+.no-tracks {
+  margin: auto;
+}
