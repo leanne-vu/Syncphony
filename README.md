@@ -3,7 +3,7 @@
      alt="Hey Arnold listening tom music" width="250" height="178">
 
 
-Syncphony is a JavaScript web application for musical lovers who want to discover new musical genres, track their exploration, and keep a journal of their favorites. The application includes a public API
+Syncphony is a JavaScript web application for musical lovers who want to discover new musical genres, track their exploration, and keep a journal of their favorites. The application includes a public API.
 
 As an avid music lover, I wanted to build an application that would allow me to be more adventurous in my musical journey. Something I love doing is listening to random playlists on shuffle to find new tracks. This inspired me to bring this concept to musical genres, with a rating system for both genre and tracks for a more hands-on experience in discovery!
 
