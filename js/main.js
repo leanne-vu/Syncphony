@@ -117,12 +117,17 @@ $returnButton.addEventListener('click', function () {
 });
 
 $selectionList.addEventListener('click', function () {
+
   if (event.target.className === 'fa-regular fa-plus second') {
     swapViews('genreView');
     var $specificGenre = document.querySelector('.specific-genre');
     var genreName = event.target.closest('li').textContent;
     $specificGenre.textContent = genreName;
     data.currentGenre = genreName;
+    var $noTracks = document.querySelector('.no-tracks');
+    if (data.genre[genreName].length > 0) {
+      $noTracks.className = 'hidden no-tracks';
+    } else { $noTracks.className = 'no-tracks'; }
     var $li = document.querySelectorAll('.entry-list-spec');
     for (var e = 0; e < $li.length; e++) {
       $li[e].remove();
@@ -189,7 +194,12 @@ document.addEventListener('DOMContentLoaded', function () {
   $specificGenre.textContent = data.currentGenre;
   var $specificGenreEntry = document.querySelector('.specific-genre-entry');
   $specificGenreEntry.textContent = data.currentGenre + ' Entry';
-
+  var $noTracks = document.querySelector('.no-tracks');
+  if (data.genre[data.currentGenre].length > 0) {
+    $noTracks.className = 'hidden no-tracks';
+  } else {
+    $noTracks.className = 'no-tracks';
+  }
 });
 
 var $genreSpecific = document.querySelector('.genre-specific');
@@ -277,6 +287,10 @@ $form.addEventListener('submit', function () {
   var $image = document.querySelector('.form-image');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.editing = null;
+  var $noTracks = document.querySelector('.no-tracks');
+  if (data.genre[data.currentGenre].length > 0) {
+    $noTracks.className = 'hidden no-tracks';
+  }
 });
 
 function resetStars() {
@@ -402,6 +416,10 @@ $genreAdds.addEventListener('click', function () {
         var $li = document.querySelectorAll('.entry-list-spec');
         $li[i].remove();
         data.genre[data.currentGenre].splice(i, 1);
+        var $noTracks = document.querySelector('.no-tracks');
+        if (data.genre[data.currentGenre].length === 0) {
+          $noTracks.className = 'no-tracks';
+        }
       }
 
     }
