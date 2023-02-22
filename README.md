@@ -39,12 +39,12 @@ https://leanne-vu.github.io/Syncphony/
 1. Clone the repository.
 
     ```shell
-    git clone https://github.com/leanne-vu/ajax-project.git
+    git clone https://github.com/leanne-vu/Syncphony.git
     ```
  **or**
 
 1. Copy code of project at
- https://github.com/leanne-vu/ajax-project
+ https://github.com/leanne-vu/Syncphony
 
    - index.html
     - css (directory)
